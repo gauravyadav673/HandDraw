@@ -15,7 +15,7 @@ import android.view.View;
  * Created by gaurav on 28/9/17.
  */
 
-public class TouchEventsView extends View {
+public class TouchDrawView extends View {
 
     private Paint paint;
     private Path path;
@@ -23,7 +23,7 @@ public class TouchEventsView extends View {
     private String text_size;
 
 
-    public TouchEventsView(Context context, @Nullable AttributeSet attrs) {
+    public TouchDrawView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         path = new Path();
         paint = new Paint();
