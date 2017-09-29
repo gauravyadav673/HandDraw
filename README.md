@@ -1,19 +1,19 @@
 # HandDraw
 Android library to add a touch to draw widget to your android application.
-![img1](https://user-images.githubusercontent.com/22410153/31006432-46943664-a51a-11e7-8aae-9ae61f0f9ac6.png)
-
+![img1](https://user-images.githubusercontent.com/22410153/31006432-46943664-a51a-11e7-8aae-9ae61f0f9ac6.png) 
 ![img2](https://user-images.githubusercontent.com/22410153/31006480-6e73f098-a51a-11e7-8d90-763256f3088c.png)
+
 
 # Support
 Minimum sdk is 15.
 # Add With Gradle Dependency
 ## Add it in your root build.gradle at the end of repositories:
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ## Add the dependency
     compile 'com.github.gauravyadav673:HandDraw:v1.0'
     
