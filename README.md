@@ -40,6 +40,8 @@ You can resize and position this view according to your needs.
         app:bg_color="#000000"/>
         
 # Access hand draw from java
-    TouchEventsView touchEventsView = (TouchEventsView)findViewById(R.id.canvas);
+    TouchEventsView touchEventsView; //declaring
+    //put below line inside the onCreate() method
+    touchEventsView = (TouchEventsView)findViewById(R.id.canvas); //defining
     
 After addig this two your project you can enjoy your custom handDraw view.
