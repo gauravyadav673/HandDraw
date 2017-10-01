@@ -145,5 +145,6 @@ public class TouchDrawView extends View {
             e.printStackTrace();
             Toast.makeText(mContext, "error", Toast.LENGTH_LONG).show();
         }
+
     }
 }
