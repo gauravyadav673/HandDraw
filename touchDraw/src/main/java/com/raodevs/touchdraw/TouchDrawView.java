@@ -17,17 +17,17 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Vector;
 
 /**
- * Created by gaurav on 28/9/17.
+ * Created by root on 1/10/17.
  */
 
 public class TouchDrawView extends View {
 
-    private Paint paint;
+    private Pen myPen;
     private Path path;
-    private String text_color="BLUE", bg_color="WHITE";
-    private String text_size="5f";
+    private String bg_color="WHITE";
     private Context mContext;
 
 
@@ -41,7 +41,9 @@ public class TouchDrawView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Paint paint = myPen.getPen();
         canvas.drawPath(path, paint);
+
     }
 
     @Override
@@ -66,68 +68,55 @@ public class TouchDrawView extends View {
     }
 
     private void initPaint(AttributeSet atr){
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStyle(Paint.Style.STROKE);
+        myPen = new Pen();
         TypedArray typedArray = mContext.getTheme().obtainStyledAttributes(atr, R.styleable.Canvas, 0, 0);
-        initAttributes(typedArray);
-        paint.setColor(Color.parseColor(text_color));
-        paint.setStrokeWidth(Float.parseFloat(text_size));
-        this.setBackgroundColor(Color.parseColor(bg_color));
+        String t_color = typedArray.getString(R.styleable.Canvas_paint_color);
+        String t_size = typedArray.getString(R.styleable.Canvas_paint_width);
+        if(t_color != null){
+            myPen.setPaint_color(Color.parseColor(t_color));
+        }
+        if(t_size != null){
+            myPen.setStrokeWidth(Float.valueOf(t_size));
+        }
+        String background_color = typedArray.getString(R.styleable.Canvas_bg_color);
+        if(background_color != null){
+            try {
+                this.setBackgroundColor(Color.parseColor(background_color));
+                bg_color = String.format("#%06X", (0xFFFFFF & Color.parseColor(background_color)));
+            }catch (Exception e){
+                Log.d("TouchDrawView", e.toString());
+            }
+
+        }
         this.setDrawingCacheEnabled(true);
         this.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
     }
 
 
-    private void initAttributes(TypedArray typedArray) {
-        String t_color = typedArray.getString(R.styleable.Canvas_paint_color);
-        String t_size = typedArray.getString(R.styleable.Canvas_paint_width);
-        String background_color = typedArray.getString(R.styleable.Canvas_bg_color);
-        if(t_color != null){
-            text_color = t_color;
-        }
-        if(t_size != null){
-            text_size = t_size;
-        }
-        if(background_color != null){
-            bg_color = background_color;
-        }
-    }
-
-    public int getPaintColor(){
-        return paint.getColor();
+    public String getPaintColor(){
+        return myPen.getPaint_color();
     }
 
     public float getStrokeWidth(){
-        return paint.getStrokeWidth();
+        return myPen.getStroke_width();
     }
-    public int getBackgroundColor(){
-        return this.getBackgroundColor();
+
+    public String getBGColor(){
+        return bg_color;
     }
 
     public void setPaintColor(int paintColor){
-        text_color = String.format("#%06X", (0xFFFFFF & paintColor));
-        try {
-            paint.setColor(Color.parseColor(text_color));
-        }catch (Exception e){
-            Log.d("Paint", e.toString());
-        }
+        myPen.setPaint_color(paintColor);
     }
 
     public void setStrokeWidth(float paintWidth){
-        text_size = String.valueOf(paintWidth);
-        try {
-            paint.setStrokeWidth(paintWidth);
-        }catch (Exception e){
-            Log.d("Paint", e.toString());
-        }
+        myPen.setStrokeWidth(paintWidth);
     }
 
     public void setBGColor(int bgColor){
-        bg_color = String.format("#%06X", (0xFFFFFF & bgColor));
         try {
-            this.setBackgroundColor(Color.parseColor(bg_color));
+            this.setBackgroundColor(bgColor);
+            bg_color = String.format("#%06X", (0xFFFFFF & bgColor));
         }catch (Exception e){
             Log.d("Paint", e.toString());
         }
@@ -155,5 +144,10 @@ public class TouchDrawView extends View {
             Toast.makeText(mContext, "error", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    public Bitmap getFile(){
+        Bitmap file = this.getDrawingCache();
+        return file;
     }
 }

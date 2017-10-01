@@ -1,8 +1,8 @@
 package com.raodevs.handdraw;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,10 +19,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         touchDrawView = (TouchDrawView)findViewById(R.id.touch);
-        touchDrawView.setPaintColor(Color.MAGENTA);
-        touchDrawView.setPaintColor(Color.rgb(10, 20, 10));
+/*        touchDrawView.setPaintColor(Color.MAGENTA);
         touchDrawView.setBGColor(Color.BLUE);
-        touchDrawView.setStrokeWidht(20f);
+        touchDrawView.setStrokeWidth(20f);*/
+        Log.d("pColor", String.valueOf(touchDrawView.getPaintColor()));
+        Log.d("bColor", String.valueOf(touchDrawView.getBGColor()));
+        Log.d("pWidth", String.valueOf(touchDrawView.getStrokeWidth()));
+
         saveButton = (Button)findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
