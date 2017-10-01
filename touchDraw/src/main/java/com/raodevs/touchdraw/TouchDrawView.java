@@ -111,7 +111,7 @@ public class TouchDrawView extends View {
         }
     }
 
-    public void setStrokeWidht(float paintWidth){
+    public void setStrokeWidth(float paintWidth){
         text_size = String.valueOf(paintWidth);
         try {
             paint.setStrokeWidth(paintWidth);
@@ -123,7 +123,7 @@ public class TouchDrawView extends View {
     public void setBGColor(int bgColor){
         bg_color = String.format("#%06X", (0xFFFFFF & bgColor));
         try {
-            paint.setColor(Color.parseColor(bg_color));
+            this.setBackgroundColor(Color.parseColor(bg_color));
         }catch (Exception e){
             Log.d("Paint", e.toString());
         }
@@ -132,12 +132,17 @@ public class TouchDrawView extends View {
     public void saveFile(){
         Bitmap bitmap = this.getDrawingCache();
         String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-        File file = new File(path+"/image.png");
+
+        File f = new File(Environment.getExternalStorageDirectory(), "NEW_FOLDER");
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+        File file = new File(path+"/NEW_FOLDER/image.png");
         FileOutputStream ostream;
         try {
             file.createNewFile();
             ostream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, ostream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
             ostream.flush();
             ostream.close();
             Toast.makeText(mContext, "image saved", Toast.LENGTH_LONG).show();

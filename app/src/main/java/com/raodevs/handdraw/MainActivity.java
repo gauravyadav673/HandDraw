@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
         touchDrawView = (TouchDrawView)findViewById(R.id.touch);
         touchDrawView.setPaintColor(Color.MAGENTA);
+        touchDrawView.setPaintColor(Color.rgb(10, 20, 10));
+        touchDrawView.setBGColor(Color.BLUE);
+        touchDrawView.setStrokeWidht(20f);
         saveButton = (Button)findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
