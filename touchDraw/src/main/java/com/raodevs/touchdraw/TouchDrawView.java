@@ -35,17 +35,7 @@ public class TouchDrawView extends View {
         super(context, attrs);
         mContext = context;
         path = new Path();
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStyle(Paint.Style.STROKE);
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Canvas, 0, 0);
-        initAttributes(typedArray);
-        paint.setColor(Color.parseColor(text_color));
-        paint.setStrokeWidth(Float.parseFloat(text_size));
-        this.setBackgroundColor(Color.parseColor(bg_color));
-        this.setDrawingCacheEnabled(true);
-        this.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        initPaint(attrs);
     }
 
     @Override
@@ -73,6 +63,20 @@ public class TouchDrawView extends View {
         }
         invalidate();
         return true;
+    }
+
+    private void initPaint(AttributeSet atr){
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStyle(Paint.Style.STROKE);
+        TypedArray typedArray = mContext.getTheme().obtainStyledAttributes(atr, R.styleable.Canvas, 0, 0);
+        initAttributes(typedArray);
+        paint.setColor(Color.parseColor(text_color));
+        paint.setStrokeWidth(Float.parseFloat(text_size));
+        this.setBackgroundColor(Color.parseColor(bg_color));
+        this.setDrawingCacheEnabled(true);
+        this.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
     }
 
 
