@@ -29,6 +29,7 @@ public class TouchDrawView extends View {
     private Path path;
     private String bg_color="WHITE";
     private Context mContext;
+    private boolean isFillOn= false;
 
 
     public TouchDrawView(Context context, @Nullable AttributeSet attrs) {
@@ -53,7 +54,11 @@ public class TouchDrawView extends View {
         int eventaction = event.getAction();
         switch (eventaction) {
             case MotionEvent.ACTION_DOWN:
-                path.moveTo(X, Y);
+                if(isFillOn){
+                    fillColor(X, Y);
+                }else {
+                    path.moveTo(X, Y);
+                }
                 break;
 
             case MotionEvent.ACTION_MOVE:
@@ -122,6 +127,14 @@ public class TouchDrawView extends View {
         }
     }
 
+    public void setFillingOn(boolean isFill){
+        isFillOn = isFill;
+    }
+
+    public boolean getIsFillingOn(){
+        return isFillOn;
+    }
+
     public void saveFile(){
         Bitmap bitmap = this.getDrawingCache();
         String path = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -149,5 +162,9 @@ public class TouchDrawView extends View {
     public Bitmap getFile(){
         Bitmap file = this.getDrawingCache();
         return file;
+    }
+
+    public void fillColor(float x, float y){
+
     }
 }
