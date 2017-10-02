@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                touchDrawView.saveFile();
+                touchDrawView.savenewFile();
             }
         });
     }
