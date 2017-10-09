@@ -46,14 +46,14 @@ You can resize and position this view according to your needs.
     touchEventsView = (TouchEventsView)findViewById(R.id.canvas); //defining
     
 ## Developers can interact more by using following code
-        touchDrawView.setPaintColor(Color.MAGENTA);// for changing paint color
-        touchDrawView.setBGColor(Color.BLUE);// for changing background color
-        touchDrawView.setStrokeWidth(20f);// for changing stroke width
-	
+    touchDrawView.setPaintColor(Color.MAGENTA);// for changing paint color
+    touchDrawView.setBGColor(Color.BLUE);// for changing background color
+    touchDrawView.setStrokeWidth(20f);// for changing stroke width
+	///****//
 	touchDrawView.clear();//for clearing the whole view(can be redone by using redo function)
     touchDrawView.undo();//for undoing last stroke
 	touchDrawView.redo();//for redoing latest changes
-	
+	///***///
 	touchDrawView.saveFile(folderName, fileName)//saves the current view in .jpeg format
 	touchDrawView.getFile()//returns current view in Bitmap format
 After adding this to your project you can enjoy your custom handDraw view.
