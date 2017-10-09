@@ -1,5 +1,4 @@
 package com.raodevs.touchdraw;
-
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;

@@ -17,12 +17,29 @@
         app:bg_color="WHITE"/>
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:text="CLEAR"/>
+
+    <Button
+        android:id="@+id/undo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="SAVE"/>
+        android:text="UNDO"/>
+
+    <Button
+        android:id="@+id/redo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentBottom="true"
+        android:text="REDO"/>
 
 
 </RelativeLayout>
