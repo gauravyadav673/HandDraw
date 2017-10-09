@@ -50,11 +50,10 @@ You can resize and position this view according to your needs.
         touchDrawView.setBGColor(Color.BLUE);// for changing background color
         touchDrawView.setStrokeWidth(20f);// for changing stroke width
 	
-	touchDrawView.clear();//for clearing the whole view(it can be redone by using redo function)
-    	touchDrawView.undo();//for undoing last stroke
+	touchDrawView.clear();//for clearing the whole view(can be redone by using redo function)
+    touchDrawView.undo();//for undoing last stroke
 	touchDrawView.redo();//for redoing latest changes
 	
-	touchDrawView.saveFile(folderName, fileName)/*saves the current view in .jpeg format with filename given and under the 						foldername given here*/
-	
+	touchDrawView.saveFile(folderName, fileName)//saves the current view in .jpeg format
 	touchDrawView.getFile()//returns current view in Bitmap format
 After adding this to your project you can enjoy your custom handDraw view.
