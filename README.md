@@ -16,7 +16,7 @@ Minimum sdk is 15.
 		}
 	}
 ## Add the dependency
-    compile 'com.github.gauravyadav673:HandDraw:v1.0'
+    compile 'com.github.gauravyadav673:HandDraw:v1.02'
     
 ## Add HandDraw to layout
     <com.raodevs.touchdraw.TouchEventsView
@@ -45,4 +45,16 @@ You can resize and position this view according to your needs.
     //put below line inside the onCreate() method
     touchEventsView = (TouchEventsView)findViewById(R.id.canvas); //defining
     
+## Developers can interact more by using following code
+        touchDrawView.setPaintColor(Color.MAGENTA);// for changing paint color
+        touchDrawView.setBGColor(Color.BLUE);// for changing background color
+        touchDrawView.setStrokeWidth(20f);// for changing stroke width
+	
+	touchDrawView.clear();//for clearing the whole view(it can be redone by using redo function)
+    	touchDrawView.undo();//for undoing last stroke
+	touchDrawView.redo();//for redoing latest changes
+	
+	touchDrawView.saveFile(folderName, fileName)/*saves the current view in .jpeg format with filename given and under the 						foldername given here*/
+	
+	touchDrawView.getFile()//returns current view in Bitmap format
 After adding this to your project you can enjoy your custom handDraw view.
