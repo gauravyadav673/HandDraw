@@ -18,7 +18,7 @@ Minimum sdk is 15.
 ## Add the dependency
     compile 'com.github.gauravyadav673:HandDraw:v1.02'
     
-## Add HandDraw to layout
+## Add HandDraw to layoutk
     <com.raodevs.touchdraw.TouchEventsView
         android:id="@+id/canvas"
         android:layout_width="match_parent"
