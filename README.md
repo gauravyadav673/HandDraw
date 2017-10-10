@@ -19,7 +19,7 @@ Minimum sdk is 15.
     compile 'com.github.gauravyadav673:HandDraw:v1.02'
     
 ## Add HandDraw to layout
-    <com.raodevs.touchdraw.TouchEventsView
+    <com.raodevs.touchdraw.TouchDrawView
         android:id="@+id/canvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -32,7 +32,7 @@ You can resize and position this view according to your needs.
     <!--Change background color-->
         app:bg_color="#000000"
 ## Example : Full Customization
-    <com.raodevs.touchdraw.TouchEventsView
+    <com.raodevs.touchdraw.TouchDrawView
         android:id="@+id/canvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,9 +41,9 @@ You can resize and position this view according to your needs.
         app:bg_color="#000000"/>
         
 # Access hand draw from java
-    TouchEventsView touchEventsView; //declaring
+    TouchDrawView touchDrawView; //declaring
     //put below line inside the onCreate() method
-    touchEventsView = (TouchEventsView)findViewById(R.id.canvas); //defining
+    touchDrawView = (TouchDrawView)findViewById(R.id.canvas); //defining
     
 ## Developers can interact more by using following code
     touchDrawView.setPaintColor(Color.MAGENTA);// for changing paint color
