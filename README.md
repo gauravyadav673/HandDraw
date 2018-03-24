@@ -57,3 +57,10 @@ You can resize and position this view according to your needs.
 	touchDrawView.saveFile(folderName, fileName)//saves the current view in .jpeg format
 	touchDrawView.getFile()//returns current view in Bitmap format
 After adding this to your project you can enjoy your custom handDraw view.
+
+## How can you contribute to it ?
+Well, that's not a difficult task. Contributors are most welcomed. You can simpy add comments to the code so others can understand it better, you can report issues or bugs, add any new function you want to add or you can contribute on any of the following topics
+	1) Implementing bezier curve for smoother curves.
+	2) Implementing a color picker 
+	3) Adding more to this list
+	
