@@ -47,6 +47,7 @@ public class TouchDrawView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        getParent().requestDisallowInterceptTouchEvent(true);
         Paint paint = myPen.getPen();
         for(Pair<Path, Pen> p : paths){
             canvas.drawPath(p.first, p.second.getPen());
