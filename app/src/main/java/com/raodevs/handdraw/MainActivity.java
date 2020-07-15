@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.raodevs.touchdraw.TouchDrawView;
-import com.raodevs.touchdraw.TrialTouchDrawView;
+import com.raodevs.touchdraw.TouchDrawView;
 
 public class MainActivity extends AppCompatActivity {
 
