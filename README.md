@@ -21,7 +21,7 @@ allprojects {
 
 ## Add the dependency
 ```groovy
-implementation 'com.github.gauravyadav673:HandDraw:v1.02'
+implementation 'com.github.gauravyadav673:HandDraw:v2.0'
 ```
 
 ## Add HandDraw to layout
