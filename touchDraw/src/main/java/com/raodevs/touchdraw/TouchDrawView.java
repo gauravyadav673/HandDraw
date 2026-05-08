@@ -7,8 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.os.Environment;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Pair;
@@ -105,24 +104,27 @@ public class TouchDrawView extends View {
             }catch (Exception e){
                 Log.d("TouchDrawView", e.toString());
             }
-
         }
-        this.setDrawingCacheEnabled(true);
-        this.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        typedArray.recycle();
+    }
 
-
+    //renders the current view into a Bitmap
+    private Bitmap renderBitmap() {
+        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        draw(canvas);
+        return bitmap;
     }
 
     //saves the screen data in storage
     public void saveFile(String folderName, String fileName){
-        Bitmap bitmap = this.getDrawingCache();
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+        Bitmap bitmap = renderBitmap();
 
-        File f = new File(Environment.getExternalStorageDirectory(), folderName);
-        if (!f.exists()) {
-            f.mkdirs();
+        File dir = new File(mContext.getExternalFilesDir(null), folderName);
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
-        File file = new File(path+"/" + folderName + "/" + fileName + ".jpeg");
+        File file = new File(dir, fileName + ".jpeg");
         FileOutputStream ostream;
         try {
             if(file.exists()){
@@ -138,13 +140,11 @@ public class TouchDrawView extends View {
             e.printStackTrace();
             Toast.makeText(mContext, "error", Toast.LENGTH_LONG).show();
         }
-
     }
 
-    //returns the  bitmap file of the screen
+    //returns the bitmap of the current view
     public Bitmap getFile(){
-        Bitmap file = this.getDrawingCache();
-        return file;
+        return renderBitmap();
     }
 
     //UnDo the last change done
