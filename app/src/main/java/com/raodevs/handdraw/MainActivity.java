@@ -27,9 +27,15 @@ public class MainActivity extends AppCompatActivity {
         clearButton = (Button) findViewById(R.id.clear);
         unDoButton  = (Button) findViewById(R.id.undo);
         reDoButon   = (Button) findViewById(R.id.redo);
+        Button eraserButton = (Button) findViewById(R.id.eraser);
 
         clearButton.setOnClickListener(v -> touchDrawView.clear());
         unDoButton.setOnClickListener(v -> touchDrawView.undo());
         reDoButon.setOnClickListener(v -> touchDrawView.redo());
+        eraserButton.setOnClickListener(v -> {
+            boolean nowErasing = !touchDrawView.isEraserMode();
+            touchDrawView.setEraserMode(nowErasing);
+            eraserButton.setText(nowErasing ? "DRAW" : "ERASER");
+        });
     }
 }

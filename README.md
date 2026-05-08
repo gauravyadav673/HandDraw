@@ -74,6 +74,12 @@ touchDrawView.redo();  // redo last undone stroke
 
 touchDrawView.saveFile(folderName, fileName); // saves as .jpeg to app-scoped external storage
 touchDrawView.getFile();                      // returns current view as a Bitmap
+
+// Eraser
+touchDrawView.setEraserMode(true);   // switch to eraser mode
+touchDrawView.setEraserMode(false);  // switch back to draw mode (restores previous color & width)
+touchDrawView.isEraserMode();        // returns true if eraser is currently active
+touchDrawView.setEraserWidth(50f);   // set eraser stroke width (default 30f)
 ```
 
 > **Note:** `saveFile()` saves to the app's scoped external storage directory

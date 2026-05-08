@@ -27,8 +27,11 @@ import java.util.Stack;
 public class TouchDrawView extends View {
 
     private Pen myPen;
+    private Pen lastDrawPen; // remembers draw settings when switching to/from eraser
     private Path path;
     private String bg_color="WHITE";
+    private boolean eraserMode = false;
+    private float eraserWidth = 30f;
     private Context mContext;
     private ArrayList<Pair<Path, Pen>> paths;//keeps record of every different path and paint properties associated with it
     private Stack<Pair<Path, Pen>> backup;//keeps a backup for redoing the changes
@@ -39,6 +42,9 @@ public class TouchDrawView extends View {
         path = new Path();
         paths = new ArrayList<>();
         backup = new Stack<>();
+        // Disable hardware acceleration for this view — required for correct
+        // Path rendering and off-screen bitmap capture via draw(canvas).
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         initPaint(attrs);
     }
 
@@ -86,11 +92,15 @@ public class TouchDrawView extends View {
                 Pair<Path, Pen> pair = new Pair<>(path, myPen);
                 paths.add(pair);
                 path = new Path();
-                String c = myPen.getPaint_color();
-                float w = myPen.getStroke_width();
-                myPen = new Pen();
-                myPen.setStrokeWidth(w);
-                myPen.setPaint_color(Color.parseColor(c));
+                if (eraserMode) {
+                    myPen = Pen.createEraser(eraserWidth);
+                } else {
+                    String c = myPen.getPaint_color();
+                    float w = myPen.getStroke_width();
+                    myPen = new Pen();
+                    myPen.setStrokeWidth(w);
+                    myPen.setPaint_color(Color.parseColor(c));
+                }
                 break;
         }
         invalidate();
@@ -219,6 +229,38 @@ public class TouchDrawView extends View {
             bg_color = String.format("#%06X", (0xFFFFFF & bgColor));
         }catch (Exception e){
             Log.d("Paint", e.toString());
+        }
+    }
+
+    /**
+     * Enables or disables eraser mode.
+     * In eraser mode strokes clear pixels rather than painting them.
+     * Switching back to draw mode restores the previous color and width.
+     */
+    public void setEraserMode(boolean enabled) {
+        if (eraserMode == enabled) return;
+        eraserMode = enabled;
+        if (enabled) {
+            lastDrawPen = myPen;
+            myPen = Pen.createEraser(eraserWidth);
+        } else {
+            myPen = (lastDrawPen != null) ? lastDrawPen : new Pen();
+        }
+    }
+
+    /** Returns true if eraser mode is currently active. */
+    public boolean isEraserMode() {
+        return eraserMode;
+    }
+
+    /**
+     * Sets the eraser stroke width. Takes effect immediately if eraser mode is active.
+     * @param width stroke width in pixels
+     */
+    public void setEraserWidth(float width) {
+        eraserWidth = width;
+        if (eraserMode) {
+            myPen = Pen.createEraser(eraserWidth);
         }
     }
     //setters end
