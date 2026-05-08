@@ -54,22 +54,35 @@ public class TouchDrawView extends View {
         canvas.drawPath(path, paint);
     }
 
+    private float lastX, lastY;
+
     //called when screen is touched or untouched
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float X = (int) event.getX();
-        float Y = (int) event.getY();
+        float X = event.getX();
+        float Y = event.getY();
         int eventaction = event.getAction();
         switch (eventaction) {
             case MotionEvent.ACTION_DOWN:
-                 path.moveTo(X, Y);
+                path.moveTo(X, Y);
+                lastX = X;
+                lastY = Y;
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                path.lineTo(X, Y);
+                // Draw a quadratic bezier curve through the midpoint between
+                // the last position and the current position. This produces
+                // smooth, natural-looking curves instead of jagged line segments.
+                float midX = (lastX + X) / 2;
+                float midY = (lastY + Y) / 2;
+                path.quadTo(lastX, lastY, midX, midY);
+                lastX = X;
+                lastY = Y;
                 break;
 
             case MotionEvent.ACTION_UP:
+                // Draw final segment to the exact finger-up position
+                path.lineTo(X, Y);
                 Pair<Path, Pen> pair = new Pair<>(path, myPen);
                 paths.add(pair);
                 path = new Path();
